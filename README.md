@@ -50,7 +50,8 @@ Context:      131072（128K，Agent 场景；可到 262K）
 ### 性能报告（`results/final/`）
 | 报告 | 内容 |
 |------|------|
-| [comprehensive-comparison.md](results/final/comprehensive-comparison.md) | **全配置总表**（量化×并行×投机，选型首选看这份） |
+| [**性能速览.md**](results/final/性能速览.md) | ⭐ **一页看全**（3分钟看清所有配置结果 + 选型速查，先看这份） |
+| [comprehensive-comparison.md](results/final/comprehensive-comparison.md) | 全配置详表（量化×并行×投机，深挖细节看这份） |
 | [tp4-vs-pp4-report.md](results/final/tp4-vs-pp4-report.md) | TP=4 vs PP=4，推翻"TP 跑不起来" |
 | [matrix-fp8-vs-nvfp4.md](results/final/matrix-fp8-vs-nvfp4.md) | FP8 vs NVFP4 × TP2/TP4 矩阵 + 能力测试 |
 | [dflash-vs-mtp-report.md](results/final/dflash-vs-mtp-report.md) | DFlash vs MTP 投机解码对比 |
