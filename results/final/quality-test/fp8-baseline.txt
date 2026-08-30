@@ -1,0 +1,22 @@
+===Q1数学===
+5452
+===Q2推理===
+鸡23只，兔12只
+===Q3代码===
+```python
+def is_prime(n: int) -> bool:
+    if n < 2:
+        return False
+    if n == 2:
+        return True
+    if n % 2 == 0:
+        return False
+    for i in range(3, int(n**0.5) + 1, 2):
+        if n % i == 0:
+            return False
+    return True
+```
+===Q4知识===
+299792458
+===Q5多步===
+星期五

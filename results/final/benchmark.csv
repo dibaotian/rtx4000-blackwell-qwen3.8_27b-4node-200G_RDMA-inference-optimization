@@ -1,0 +1,87 @@
+timestamp,phase,model,quantization,runtime,vllm_version,cuda,tp,pp,dp,mtp,kv_dtype,cudagraph,context_input,output_tokens,concurrency,requests_ok,requests_failed,output_tok_s,aggregate_tok_s,ttft_ms_mean,ttft_ms_median,tpot_ms_mean,e2e_ms_mean,approx_prefill_tok_s,preemptions,status,notes
+2026-08-29,current-concurrency,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,1,4,1,off,fp8,on,1024,512,1,4,0,20.62,61.85,318,319,47.97,24832,,0,OK,maxseq4 batched2048 graph124 c1
+2026-08-29,current-concurrency,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,1,4,1,off,fp8,on,1024,512,2,8,0,40.91,122.74,440,380,48.10,25017,,0,OK,maxseq4 batched2048 graph124 c2 1.98x
+2026-08-29,current-concurrency,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,1,4,1,off,fp8,on,1024,512,4,12,0,76.07,228.22,818,963,51.03,26895,,0,OK,maxseq4 batched2048 graph124 c4 3.69x
+2026-08-29,current-longctx,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,1,4,1,off,fp8,on,32768,32,1,1,0,5.46,5594.57,4276,4276,51.18,5862,7663,0,OK,maxseq4 batched2048 cold 32K
+2026-08-29,current-longctx,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,1,4,1,off,fp8,on,262112,32,1,1,0,0.41,3360.15,76222,76222,57.85,78015,3439,0,OK,maxseq4 batched2048 exact 262144 boundary
+2026-08-29,cudagraph-ab,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,1,4,1,off,fp8,off,1024,512,1,2,0,18.65,18.65,353,,53.04,27460,,0,OK,eager baseline
+2026-08-29,cudagraph-ab,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,1,4,1,off,fp8,off,1024,512,8,8,0,131.78,131.78,1730,,57.39,31050,,0,OK,eager c8
+2026-08-29,cudagraph-ab,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,1,4,1,off,fp8,on,1024,512,8,8,0,142.60,142.60,1880,,52.50,28700,,0,OK,graph c8 +8.2%
+2026-08-29,throughput,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,1,4,1,off,fp8,on,1024,128,1,4,0,18.04,18.04,343,,53.15,7093,2984,0,OK,short c1
+2026-08-29,throughput,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,1,4,1,off,fp8,on,1024,128,4,16,0,58.98,58.98,1222,,58.68,8674,838,0,OK,short c4
+2026-08-29,throughput,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,1,4,1,off,fp8,on,1024,128,8,16,0,105.31,105.31,1779,,62.31,9693,575,0,OK,short c8 peak
+2026-08-29,throughput,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,1,4,1,off,fp8,on,1024,128,16,32,0,96.00,96.00,9513,,72.55,18726,108,0,SATURATED,c16 regress
+2026-08-29,longctx,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,1,4,1,off,fp8,on,32768,32,1,1,0,4.53,4.53,5388,,54.07,7064,6082,0,OK,cold 32K decode~18.5
+2026-08-29,longctx,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,1,4,1,off,fp8,on,131072,32,1,1,0,1.08,1.08,27946,,57.96,29742,4690,0,OK,cold 128K decode~17.25
+2026-08-29,longctx,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,1,4,1,off,fp8,on,262112,32,1,1,0,0.39,0.39,79824,,60.52,81700,3284,0,OK,cold 262K boundary decode~16.52
+2026-08-29,longctx-stress,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,1,4,1,off,fp8,on,262112,32,2,2,0,0.27,0.27,156064,,1652.93,207304,1680,1,PREEMPT,full-ctx c2
+2026-08-29,longctx-stress,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,1,4,1,off,fp8,on,262112,32,4,4,0,0.27,0.27,293449,,2468.84,369983,893,3,PREEMPT,full-ctx c4
+2026-08-29,mtp,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,1,4,1,mtp1-3,fp8,on,,,,,,,,,,,,,BLOCKED,Qwen3_5MTP no PP support NotImplementedError
+2026-08-29,tp4,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,4,1,1,off,fp8,on,,,,,,,,,,,,,FAILED,engine core init failed at KV/warmup collective_rpc
+2026-08-29,tp4-actual,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,4,1,1,off,fp8,on,1024,512,1,4,0,42.21,42.21,182.79,179.01,23.38,,,0,OK,TP4 REAL c1 decode 2x of PP4
+2026-08-29,tp4-actual,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,4,1,1,off,fp8,on,1024,512,2,8,0,76.38,76.38,319.87,283.51,25.60,,,0,OK,TP4 REAL c2
+2026-08-29,tp4-actual,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,4,1,1,off,fp8,on,1024,512,4,12,0,142.34,142.34,403.33,372.62,27.34,,,0,OK,TP4 REAL c4 4cards 99% util
+2026-08-29,mtp-tp4,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,4,1,1,mtp-n1,fp8,on,1024,512,1,4,0,65.56,65.56,188.35,188.16,14.65,,,0,OK,MTP n1 accept75.5% +55pct vs tp4
+2026-08-29,mtp-tp4,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,4,1,1,mtp-n1,fp8,on,1024,512,2,8,0,100.12,100.12,265.62,237.15,16.58,,,0,OK,MTP n1 c2
+2026-08-29,mtp-tp4,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,4,1,1,mtp-n1,fp8,on,1024,512,4,12,0,210.14,210.14,331.49,241.32,17.24,,,0,OK,MTP n1 c4
+2026-08-29,mtp-tp4,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,4,1,1,mtp-n2,fp8,on,1024,512,1,4,0,62.12,62.12,,190.49,12.86,,,0,OK,MTP n2 accept61.5% c1
+2026-08-29,mtp-tp4,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,4,1,1,mtp-n2,fp8,on,1024,512,2,8,0,121.51,121.51,,241.07,15.02,,,0,OK,MTP n2 c2
+2026-08-29,mtp-tp4,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,4,1,1,mtp-n2,fp8,on,1024,512,4,12,0,226.28,226.28,,245.92,13.79,,,0,OK,MTP n2 c4 best-c4
+2026-08-29,mtp-tp4,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,4,1,1,mtp-n3,fp8,on,1024,512,1,4,0,102.02,102.02,,203.31,9.12,,,0,OK,MTP n3 best-c1 TPOT9ms accept51pct
+2026-08-29,mtp-tp4,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,4,1,1,mtp-n3,fp8,on,1024,512,2,8,0,129.82,129.82,,248.75,11.23,,,0,OK,MTP n3 c2
+2026-08-29,mtp-tp4,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,4,1,1,mtp-n3,fp8,on,1024,512,4,12,0,217.47,217.47,,258.74,13.19,,,0,OK,MTP n3 c4
+2026-08-29,mtp-tune,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,4,1,1,mtp-n3,fp8,on,1024,512,1,4,0,85.98,85.98,,191.20,9.41,,,0,REJECT,batched4096 worse than 2048 (102->86)
+2026-08-29,mtp-tune,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,4,1,1,mtp-n3,fp8,on,1024,512,4,12,0,224.50,224.50,,259.47,14.91,,,0,REJECT,batched4096 c4 flat vs 2048
+2026-08-29,multicard,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,1,2,1,off,fp8,on,1024,512,1,3,0,20.03,20.03,,325.00,47.92,,,0,OK,PP2 2card c1 same as PP4
+2026-08-29,multicard,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,1,2,1,off,fp8,on,1024,512,2,6,0,36.88,36.88,,519.68,53.37,,,0,OK,PP2 c2
+2026-08-29,multicard,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,1,2,1,off,fp8,on,1024,512,4,8,0,70.62,70.62,,1006.86,54.80,,,0,OK,PP2 c4 maxlen131072
+2026-08-29,multicard,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,2,1,1,off,fp8,on,1024,512,1,4,0,33.90,33.90,,233.47,29.08,,,0,OK,TP2 2card c1
+2026-08-29,multicard,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,2,1,1,off,fp8,on,1024,512,2,8,0,62.53,62.53,,394.27,31.28,,,0,OK,TP2 c2
+2026-08-29,multicard,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,2,1,1,off,fp8,on,1024,512,4,12,0,117.08,117.08,,512.76,33.17,,,0,OK,TP2 c4
+2026-08-29,multicard,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,2,1,1,mtp-n3,fp8,on,1024,512,1,4,0,50.38,50.38,,273.41,14.38,,,0,OK,TP2+MTP3 c1 +49pct
+2026-08-29,multicard,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,2,1,1,mtp-n3,fp8,on,1024,512,2,8,0,117.31,117.31,,,17.50,,,0,OK,TP2+MTP3 c2
+2026-08-29,multicard,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,2,1,1,mtp-n3,fp8,on,1024,512,4,12,0,201.17,201.17,,,15.36,,,0,OK,TP2+MTP3 c4
+2026-08-29,dflash-tp4,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,4,1,1,dflash-n7,fp8,on,1024,512,1,4,0,125.99,125.99,,207.43,6.37,,,0,OK,DFlash2 n7 BEST-single 126tok/s accept27.9pct
+2026-08-29,dflash-tp4,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,4,1,1,dflash-n7,fp8,on,1024,512,2,8,0,135.75,135.75,,,14.29,,,0,OK,DFlash2 n7 c2
+2026-08-29,dflash-tp4,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,4,1,1,dflash-n7,fp8,on,1024,512,4,12,0,199.68,199.68,,,15.34,,,0,OK,DFlash2 n7 c4 (MTP-n2 wins c4 at 226)
+2026-08-29,real-sharegpt,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,4,1,1,off,fp8,on,sharegpt,512,1,6,0,42.55,42.55,,,23.36,,,0,OK,REAL-DATA no-spec c1 baseline
+2026-08-29,real-sharegpt,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,4,1,1,mtp-n3,fp8,on,sharegpt,512,1,12,0,69.41,69.41,,,14.24,,,0,OK,REAL-DATA MTP-n3 c1
+2026-08-29,real-sharegpt,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,4,1,1,mtp-n3,fp8,on,sharegpt,512,2,12,0,134.51,134.51,,,14.41,,,0,OK,REAL-DATA MTP-n3 c2
+2026-08-29,real-sharegpt,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,4,1,1,mtp-n3,fp8,on,sharegpt,512,4,16,0,230.17,230.17,,,15.27,,,0,OK,REAL-DATA MTP-n3 c4
+2026-08-29,real-sharegpt,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,4,1,1,dflash-n6,fp8,on,sharegpt,512,1,12,0,73.20,73.20,,,13.22,,,0,OK,REAL-DATA DFlash-n6 c1
+2026-08-29,real-sharegpt,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,4,1,1,dflash-n6,fp8,on,sharegpt,512,2,12,0,136.24,136.24,,,13.75,,,0,OK,REAL-DATA DFlash-n6 c2
+2026-08-29,real-sharegpt,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,4,1,1,dflash-n6,fp8,on,sharegpt,512,4,16,0,251.90,251.90,,,13.72,,,0,OK,REAL-DATA DFlash-n6 c4 BEST-c4
+2026-08-29,real-sharegpt,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,4,1,1,dflash-n7,fp8,on,sharegpt,512,1,12,0,78.23,78.23,,,12.62,,,0,OK,REAL-DATA DFlash-n7 c1 BEST-c1
+2026-08-29,real-sharegpt,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,4,1,1,dflash-n7,fp8,on,sharegpt,512,2,12,0,136.76,136.76,,,12.86,,,0,OK,REAL-DATA DFlash-n7 c2
+2026-08-29,real-sharegpt,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,4,1,1,dflash-n7,fp8,on,sharegpt,512,4,16,0,241.83,241.83,,,14.17,,,0,OK,REAL-DATA DFlash-n7 c4
+2026-08-29,profiling,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,4,1,1,dflash-n7,fp8,on,sharegpt,512,1,10,0,96.48,96.48,,,9.87,,,0,OK,PROF temp=0 greedy accept35.2pct +24pct vs default
+2026-08-29,profiling,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,4,1,1,dflash-n7,fp8,on,sharegpt,512,4,16,0,312.83,312.83,,,11.07,,,0,OK,PROF temp=0 c4 312 +29pct vs default242
+2026-08-29,profiling,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,4,1,1,dflash-n8,fp8,on,sharegpt,512,1,0,0,0,0,,,,,,1,FAILED,n=8 exceeds block_size 8 max is 7
+2026-08-29,nvfp4,Qwen3.8-27B,NVFP4-unsloth,vLLM,0.28.1rc1.dev43,13.0,4,1,1,off,fp8,on,sharegpt,512,1,8,0,48.44,48.44,,,20.04,,,0,OK,NVFP4 no-spec temp0 +13pct vs FP8 42.8 KV1.82M
+2026-08-29,nvfp4,Qwen3.8-27B,NVFP4-unsloth,vLLM,0.28.1rc1.dev43,13.0,4,1,1,mtp-n3,fp8,on,sharegpt,512,1,10,0,97.39,97.39,,,9.86,,,0,OK,NVFP4+MTP3 temp0 c1
+2026-08-29,nvfp4,Qwen3.8-27B,NVFP4-unsloth,vLLM,0.28.1rc1.dev43,13.0,4,1,1,mtp-n3,fp8,on,sharegpt,512,4,16,0,301.27,301.27,,,12.20,,,0,OK,NVFP4+MTP3 temp0 c4
+2026-08-29,nvfp4,Qwen3.8-27B,NVFP4-unsloth,vLLM,0.28.1rc1.dev43,13.0,4,1,1,dflash-n7,fp8,on,sharegpt,512,1,10,0,86.64,86.64,,,11.23,,,0,OK,NVFP4+DFlash7 temp0 c1
+2026-08-29,nvfp4,Qwen3.8-27B,NVFP4-unsloth,vLLM,0.28.1rc1.dev43,13.0,4,1,1,dflash-n7,fp8,on,sharegpt,512,4,16,0,311.04,311.04,,,11.05,,,0,OK,NVFP4+DFlash7 temp0 c4 BEST
+2026-08-29,nvfp4-fp8-speed,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,4,1,1,off,fp8,on,sharegpt,512,1,8,0,42.84,42.84,,,23.22,,,0,OK,FP8 no-spec temp0 baseline for NVFP4 compare
+2026-08-29,matrix,Qwen3.8-27B,NVFP4-unsloth,vLLM,0.28.1rc1.dev43,13.0,4,1,1,off,fp8,on,sharegpt,512,1,8,0,49.12,49.12,,,20.16,,,0,OK,MATRIX NVFP4 TP4 nospec temp0
+2026-08-29,matrix,Qwen3.8-27B,NVFP4-unsloth,vLLM,0.28.1rc1.dev43,13.0,4,1,1,off,fp8,on,sharegpt,512,2,10,0,88.96,88.96,,,22.17,,,0,OK,MATRIX NVFP4 TP4 c2
+2026-08-29,matrix,Qwen3.8-27B,NVFP4-unsloth,vLLM,0.28.1rc1.dev43,13.0,4,1,1,off,fp8,on,sharegpt,512,4,16,0,164.48,164.48,,,23.75,,,0,OK,MATRIX NVFP4 TP4 c4
+2026-08-29,matrix,Qwen3.8-27B,NVFP4-unsloth,vLLM,0.28.1rc1.dev43,13.0,2,1,1,off,fp8,on,sharegpt,512,1,8,0,43.70,43.70,,,,,,0,OK,MATRIX NVFP4 TP2 c1
+2026-08-29,matrix,Qwen3.8-27B,NVFP4-unsloth,vLLM,0.28.1rc1.dev43,13.0,2,1,1,off,fp8,on,sharegpt,512,2,10,0,78.16,78.16,,,,,,0,OK,MATRIX NVFP4 TP2 c2
+2026-08-29,matrix,Qwen3.8-27B,NVFP4-unsloth,vLLM,0.28.1rc1.dev43,13.0,2,1,1,off,fp8,on,sharegpt,512,4,16,0,149.80,149.80,,,,,,0,OK,MATRIX NVFP4 TP2 c4
+2026-08-29,matrix,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,4,1,1,off,fp8,on,sharegpt,512,1,8,0,42.87,42.87,,,,,,0,OK,MATRIX FP8 TP4 c1
+2026-08-29,matrix,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,4,1,1,off,fp8,on,sharegpt,512,2,10,0,77.77,77.77,,,,,,0,OK,MATRIX FP8 TP4 c2
+2026-08-29,matrix,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,4,1,1,off,fp8,on,sharegpt,512,4,16,0,142.72,142.72,,,,,,0,OK,MATRIX FP8 TP4 c4
+2026-08-29,matrix,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,2,1,1,off,fp8,on,sharegpt,512,1,6,0,34.45,34.45,,,28.87,,,0,OK,MATRIX FP8 TP2 c1 maxlen131072
+2026-08-29,matrix,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,2,1,1,off,fp8,on,sharegpt,512,2,10,0,63.34,63.34,,,,,,0,OK,MATRIX FP8 TP2 c2
+2026-08-29,matrix,Qwen3.8-27B,FP8,vLLM,0.28.1rc1.dev43,13.0,2,1,1,off,fp8,on,sharegpt,512,4,16,0,121.05,121.05,,,,,,0,OK,MATRIX FP8 TP2 c4
+2026-08-29,longtext,Qwen3.8-27B,NVFP4-unsloth,vLLM,0.28.1rc1.dev43,13.0,4,1,1,dflash-n7,fp8,on,32768,32,1,1,0,5.13,5.13,5549,5549,,,5905,0,OK,LONGIN 32K prefill TTFT5.5s
+2026-08-29,longtext,Qwen3.8-27B,NVFP4-unsloth,vLLM,0.28.1rc1.dev43,13.0,4,1,1,dflash-n7,fp8,on,131072,32,1,1,0,0.94,0.94,33039,33039,,,3968,0,OK,LONGIN 128K prefill TTFT33s
+2026-08-29,longtext,Qwen3.8-27B,NVFP4-unsloth,vLLM,0.28.1rc1.dev43,13.0,4,1,1,dflash-n7,fp8,on,262112,32,1,1,0,0.31,0.31,97148,97148,,,2698,0,OK,LONGIN 262K prefill TTFT97s
+2026-08-29,longtext,Qwen3.8-27B,NVFP4-unsloth,vLLM,0.28.1rc1.dev43,13.0,4,1,1,dflash-n7,fp8,on,1024,2048,1,2,0,188.55,188.55,,,5.21,,,0,OK,LONGOUT 2K output temp0
+2026-08-29,longtext,Qwen3.8-27B,NVFP4-unsloth,vLLM,0.28.1rc1.dev43,13.0,4,1,1,dflash-n7,fp8,on,1024,4096,1,2,0,198.23,198.23,,,5.00,,,0,OK,LONGOUT 4K output temp0 fastest
+2026-08-29,hwtune,Qwen3.8-27B,NVFP4-unsloth,vLLM,0.28.1rc1.dev43,13.0,4,1,1,dflash-n7,fp8,on,sharegpt,512,1,8,0,110.0,110.0,,,,,,0,OK,HWTUNE default dynamic-boost+schedutil median~110
+2026-08-29,hwtune,Qwen3.8-27B,NVFP4-unsloth,vLLM,0.28.1rc1.dev43,13.0,4,1,1,dflash-n7,fp8,on,sharegpt,512,1,8,0,91.0,91.0,,,,,,0,REJECT,HWTUNE GPU-lock3090+CPU-perf median~91 SLOWER -17pct
+2026-08-29,prefill-fix,Qwen3.8-27B,NVFP4-unsloth,vLLM,0.28.1rc1.dev43,13.0,4,1,1,dflash-n7,fp8,on,32768,16,1,1,0,,,650,650,,,,0,OK,PREFILL steady 32K TTFT~650ms (was 5549 cold)
+2026-08-29,prefill-fix,Qwen3.8-27B,NVFP4-unsloth,vLLM,0.28.1rc1.dev43,13.0,4,1,1,dflash-n7,fp8,on,131000,16,1,1,0,,,1468,1468,,,,0,OK,PREFILL steady 128K TTFT1468ms (was 33039 cold)
+2026-08-29,prefill-fix,Qwen3.8-27B,NVFP4-unsloth,vLLM,0.28.1rc1.dev43,13.0,4,1,1,dflash-n7,fp8,on,262000,16,1,1,0,,,63051,63051,,,,0,OK,PREFILL steady 262K TTFT63s (was 97s cold)

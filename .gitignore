@@ -1,0 +1,32 @@
+# 模型权重与缓存（超大，绝不提交）
+models/
+hf-cache/
+vllm-cache/
+*.safetensors
+*.gguf
+*.bin
+
+# 实际配置（含真实 IP/密钥），只提交 cluster.env.example
+cluster.env
+cluster.env.*backup
+cluster.env.*-production
+cluster.env.pre-*
+
+# 运行日志（含 IP、冗长）
+*.log
+logs/cluster/server.log
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# HuggingFace 缓存锁
+.locks/
+.cache/
+
+# 编辑器/系统
+.DS_Store
+.vscode/
+.idea/
+*.swp

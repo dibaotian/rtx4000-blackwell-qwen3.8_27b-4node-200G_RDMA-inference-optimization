@@ -1,0 +1,13 @@
+ARG VLLM_BASE_IMAGE=vllm/vllm-openai:nightly
+FROM ${VLLM_BASE_IMAGE}
+
+# The custom ARNIC verbs provider links against libnl at runtime.
+RUN apt-get update && \
+	apt-get install -y --no-install-recommends libnl-3-200 libnl-route-3-200 && \
+	rm -rf /var/lib/apt/lists/*
+
+# Ray is an optional vLLM dependency and is required for multi-node execution.
+# Qwen3.8's multimodal processor requires Transformers 5.8 or newer.
+RUN uv pip install --system "ray[cgraph]" "transformers>=5.8.0" && \
+	uv pip uninstall --system cupy-cuda12x && \
+	uv pip install --system --reinstall --no-deps cupy-cuda13x==14.2.0
