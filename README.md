@@ -64,6 +64,7 @@ Context:      131072（128K，Agent 场景；可到 262K）
 | [nccl-dual-nic-strategy.md](results/final/nccl-dual-nic-strategy.md) | NCCL 双网卡策略（为什么两口都有流量） |
 | [congestion-control-test.md](results/final/congestion-control-test.md) | 拥塞控制(CC)开关测试（丢包−79% vs 吞吐−2.5%） |
 | [congestion-control-cost-analysis.md](results/final/congestion-control-cost-analysis.md) | CC 代价机理分析（为什么开CC有代价） |
+| [**cc-detailed-comparison.md**](results/final/cc-detailed-comparison.md) | ⭐ CC 多档对比（低并发关/高并发开，最终结论） |
 | [nvfp4-search-report.md](results/final/nvfp4-search-report.md) | NVFP4 量化模型调研 |
 
 ### 操作文档（`docs/`）
