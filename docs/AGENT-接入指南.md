@@ -8,7 +8,7 @@
 ## 1. 快速接入（TL;DR）
 
 ```
-Base URL:  http://<NODE0_IP>:8000/v1
+Base URL:  http://<SR655-1_对外IP>:8000/v1   ← SR655-1(node0) 对外业务网 IP
 Model:     qwen3.8-27b        ← 必须精确匹配，见 §5
 API Key:   (当前为空，内网无鉴权；对外必须设，见 §7)
 最大上下文: 131072 tokens (128K)
@@ -16,9 +16,14 @@ API Key:   (当前为空，内网无鉴权；对外必须设，见 §7)
 
 OpenAI 兼容，直接把 agent 的 `base_url` 指过来即可。支持：Chat Completions、工具调用（function calling）、流式、thinking 控制。
 
+> ⚠️ **IP 说明（重要）**：SR655-1 有多个 IP，用错连不上：
+> - **`<SR655-1_对外IP>`（业务/管理网，<对外网卡>）← agent 从外部连这个**
+> - `<NODE0_IP>`（内网 RDMA/Ray，ens7）：仅集群内部用，agent 不要用
+> - vLLM 监听 `0.0.0.0:8000`，所以任意网卡的 IP:8000 都能访问；对外一律用 `<SR655-1_对外IP>`。
+
 ### 最小调用示例
 ```bash
-curl http://<NODE0_IP>:8000/v1/chat/completions \
+curl http://<SR655-1_对外IP>:8000/v1/chat/completions \
   -H 'Content-Type: application/json' \
   -d '{
     "model": "qwen3.8-27b",
