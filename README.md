@@ -59,6 +59,8 @@ Context:      131072（128K，Agent 场景；可到 262K）
 | [single-request-profiling.md](results/final/single-request-profiling.md) | 单请求瓶颈 profiling |
 | [long-context-report.md](results/final/long-context-report.md) | 长文本输入输出 + 大海捞针 |
 | [hardware-tuning-report.md](results/final/hardware-tuning-report.md) | GPU/CPU 调频尝试（负面结果） |
+| [rdma-full-analysis.md](results/final/rdma-full-analysis.md) | RDMA 全面分析（带宽/延迟/质量/瓶颈判定） |
+| [rdma-monitoring-guide.md](results/final/rdma-monitoring-guide.md) | RDMA 监控指南（ARNIC 计数器 + 脚本用法） |
 | [nvfp4-search-report.md](results/final/nvfp4-search-report.md) | NVFP4 量化模型调研 |
 
 ### 操作文档（`docs/`）
